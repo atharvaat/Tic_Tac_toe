@@ -1,107 +1,48 @@
 package com.bridgelabz.tictactoeprogram;
 import java.util.Scanner;
-import java.util.Random;
 
 public class TicTacToe {
-	static char[] board = new char[10];  //taking array
-	static char player, computer;
-	private static int playLocation;
-	public static Scanner scannerObject = new Scanner(System.in); //creating scanner object
-	
-	    /*
-	     *creating the game board
-	     *Select the index from 1 to 9 to make the move.
-	     */
-		 public static void createBoard()
-		 {
-	        for (int index = 1; index < 10; index++)      
-	        {
-	            board[index] = ' ';
-	        }
-	    }
-	 
-	    /*
-	     * This game has two player x and o
-	     */
-		 public static void getPlayerChoice()
-		 {
+	 int i;
+		static char[] board = new char[10]; 
+		static char player, computer;
+		Scanner scanner = new Scanner(System.in);
 
-			 System.out.print("select X or O : ");
-			 player = Character.toUpperCase(scannerObject.next().charAt(0));
+		
+		public void initialize() {
+			for (i = 1; i < 10; i++) { 
+				board[i] = ' ';
+			}
+		}
 
-			 	if (player == 'X')
-	            computer = 'O';
-			 	else
-	            computer = 'X';
-			 	System.out.println("You have selected : " + player);
-			 	System.out.println("Computer's choice is : " + computer);
-		 }	
-	    
-		 	/*
-		 	 * Displaying the tictactoe game board
-		 	 */
-		 	 public static void showBoard()
-		 	 {
-		 		 System.out.println(board[1] + " | " + board[2] + " | " + board[3]);
-		 		 System.out.println("---------");
-		 		 System.out.println(board[4] + " | " + board[5] + " | " + board[6]);
-		 		 System.out.println("---------");
-		 		 System.out.println(board[7] + " | " + board[8] + " | " + board[9]);
-		 	 }
-	    
-		 	 /*
-		 	  * user is going to make a move to the desired location
-		 	  * if it is not in range from 1 to 9
-		 	  * then it will show you an invalid input
-		 	  */
-		 	 public static void userMove()
-		 	 {
-		 		 System.out.println("Enter Location 1-9 to Make Move");
-		 		 playLocation = scannerObject.nextInt();
-		 		 if (playLocation < 10 && playLocation > 0)
-		 		 {
-		 			 board[playLocation] = player;
-		 			 showBoard();
-		 		 } else
-		 		 {
-		 			 System.out.println("Invalid Choice");
-		 		 }
-		 	 }
-	     
-		 	 public static boolean isEmpty() {
-		       if (board[playLocation] == ' ') {
-		            return true;      
-		       } else {
-		            return false;
-		       }
-	       }
-		 	 /*
-		 	  * Tossing the coin to checking who won the first
-		 	  */
-		 	 public static void checkToss() {
-		 		 Random random = new Random();
-		 		 int tossResult = random.nextInt(2)+1;
-		 		 System.out.println("\nChoose 1 for Heads or 2 for Tails");
-		 		 int coinSelect = scannerObject.nextInt();
-		 		 
-		 		 if (coinSelect == tossResult) {
-		 			 System.out.println("\nPlayer Won The Toss! Player Starts");
-		 		 }else {
-		 			System.out.println("\nComputer Won The Toss! Computer Starts");
-		 		 }
-		 	 }
-		 	 
+		
+		public void check() { // creating method to select x & O
+			System.out.println("Please Select Your Choice Letter : 'X' or 'O' ");
+			char choice = scanner.next().charAt(0);
+			if (choice == 'X') {
+				player = 'X';
+				computer = 'O';
+			} else if (choice == 'Y') {
+				player = 'O';
+				computer = 'X';
+			}
+		}
 
-	    public static void main(String[] args)
-	    {
+		public void showboard() { // creating board
 
-	        System.out.println("Welcome To Tic Tac Toe");
-	        checkToss();
-	        createBoard();
-	        getPlayerChoice();
-	        showBoard();
-	        userMove();
-	        isEmpty();
+			System.out.println("Welcome to Tic Tac Toe");
+			System.out.println(board[1] + " | " + board[2] + " | " + board[3]);
+			System.out.println("---------");
+			System.out.println(board[4] + " | " + board[5] + " | " + board[6]);
+			System.out.println("---------");
+			System.out.println(board[7] + " | " + board[8] + " | " + board[9]);
 
-	    }
+		}
+
+		public static void main(String[] args) {
+
+			TicTacToe object = new TicTacToe();
+			object.initialize();
+			object.showboard();
+
+		}
 }
